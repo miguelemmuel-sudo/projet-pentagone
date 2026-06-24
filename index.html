@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PENTAGONEPLUS ERP - Contact & Support</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h2>PENTAGONEPLUS</h2>
+                <span class="erp-badge">ERP</span>
+                <button class="close-sidebar" id="closeSidebar"><i class="fas fa-times"></i></button>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="#" class="nav-item" data-target="dashboard-section"><i class="fas fa-tachometer-alt"></i>
+                    Dashboard</a>
+                <a href="#" class="nav-item" data-target="clients-section"><i class="fas fa-users"></i> Clients</a>
+                <a href="#" class="nav-item" data-target="ventes-section"><i class="fas fa-shopping-cart"></i> Ventes /
+                    Stock</a>
+                <a href="#" class="nav-item" data-target="galerie-section"><i class="fas fa-photo-video"></i> Galerie
+                    Projets</a>
+                <a href="#" class="nav-item" data-target="sondages-section"><i class="fas fa-star"></i> Sondages /
+                    Avis</a>
+                <a href="#" class="nav-item active" data-target="contact-section"><i class="fas fa-headset"></i> Contact
+                    & Support</a>
+            </nav>
+            <div class="sidebar-footer">
+                <a href="#" class="nav-item logout" data-target="logout-section"><i class="fas fa-sign-out-alt"></i>
+                    Déconnexion</a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Topbar -->
+            <header class="topbar">
+                <button class="menu-toggle" id="menuToggle"><i class="fas fa-bars"></i></button>
+                <div class="search-bar">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Rechercher un client, une intervention...">
+                </div>
+                <div class="user-profile">
+                    <div class="avatar"><i class="fas fa-user"></i></div>
+                    <span class="user-name">Admin Connecté</span>
+                </div>
+            </header>
+
+            <!-- Page Content -->
+            <div class="page-content">
+                <!-- Dashboard Section -->
+                <div id="dashboard-section" class="content-section" style="display: none;">
+                    <div class="page-header">
+                        <h1>TABLEAU DE BORD (DASHBOARD)</h1>
+                    </div>
+                    <div class="kpi-grid">
+                        <!-- KPI 1: Commandes -->
+                        <div class="card kpi-card" style="border-left: 5px solid var(--bleu-action);">
+                            <div class="kpi-icon"><i class="fas fa-shopping-cart"
+                                    style="color: var(--bleu-action);"></i></div>
+                            <div class="kpi-info">
+                                <h3 style="font-size: 0.9rem; color: var(--text-muted); text-transform: uppercase;">
+                                    Commandes en cours</h3>
+                                <div id="kpi-commandes"
+                                    style="font-size: 2rem; font-weight: bold; color: var(--text-main);">0</div>
+                            </div>
+                        </div>
+
+                        <!-- KPI 2: Note Moyenne -->
+                        <div class="card kpi-card" style="border-left: 5px solid var(--violet-qualite);">
+                            <div class="kpi-icon"><i class="fas fa-star" style="color: var(--violet-qualite);"></i>
+                            </div>
+                            <div class="kpi-info">
+                                <h3 style="font-size: 0.9rem; color: var(--text-muted); text-transform: uppercase;">Note
+                                    de Satisfaction</h3>
+                                <div id="kpi-note" style="font-size: 2rem; font-weight: bold; color: var(--text-main);">
+                                    4.5 / 5</div>
+                            </div>
+                        </div>
+
+                        <!-- KPI 3: Nombre de Sondages -->
+                        <div class="card kpi-card" style="border-left: 5px solid var(--vert-operationnel);">
+                            <div class="kpi-icon"><i class="fas fa-comment-dots"
+                                    style="color: var(--vert-operationnel);"></i></div>
+                            <div class="kpi-info">
+                                <h3 style="font-size: 0.9rem; color: var(--text-muted); text-transform: uppercase;">Avis
+                                    Clients</h3>
+                                <div id="kpi-sondages"
+                                    style="font-size: 2rem; font-weight: bold; color: var(--text-main);">2</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Clients Section -->
+                <div id="clients-section" class="content-section" style="display: none;">
+                    <div class="page-header" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px;">
+                        <div>
+                            <h1><i class="fas fa-users" style="color:var(--bleu-action); margin-right:10px;"></i>GESTION DE LA CLIENTÈLE</h1>
+                            <p style="color:var(--text-muted); margin-top:6px; font-size:0.95rem;">Clients enregistrés automatiquement depuis les demandes Contact & Support.</p>
+                        </div>
+                        <button id="exportClientsBtn" class="btn-primary" style="width:auto;margin-top:0;padding:10px 20px;background:linear-gradient(135deg,var(--vert-operationnel),#059669);display:flex;align-items:center;gap:8px;">
+                            <i class="fas fa-file-export"></i> Exporter CSV
+                        </button>
+                    </div>
+
+                    <!-- KPIs Clients -->
+                    <div class="clients-kpi-grid">
+                        <div class="clients-kpi-card" style="border-top:4px solid var(--bleu-action);">
+                            <div class="clients-kpi-icon" style="background:rgba(14,165,233,0.12);color:var(--bleu-action);"><i class="fas fa-users"></i></div>
+                            <div>
+                                <div class="clients-kpi-val" id="kpiTotalClients">0</div>
+                                <div class="clients-kpi-lbl">Total Clients</div>
+                            </div>
+                        </div>
+                        <div class="clients-kpi-card" style="border-top:4px solid var(--vert-operationnel);">
+                            <div class="clients-kpi-icon" style="background:rgba(16,185,129,0.12);color:var(--vert-operationnel);"><i class="fas fa-handshake"></i></div>
+                            <div>
+                                <div class="clients-kpi-val" id="kpiClientsCommercial">0</div>
+                                <div class="clients-kpi-lbl">Commercial</div>
+                            </div>
+                        </div>
+                        <div class="clients-kpi-card" style="border-top:4px solid var(--violet-qualite);">
+                            <div class="clients-kpi-icon" style="background:rgba(139,92,246,0.12);color:var(--violet-qualite);"><i class="fas fa-tools"></i></div>
+                            <div>
+                                <div class="clients-kpi-val" id="kpiClientsTechnique">0</div>
+                                <div class="clients-kpi-lbl">Technique / SAV</div>
+                            </div>
+                        </div>
+                        <div class="clients-kpi-card" style="border-top:4px solid var(--or-vente);">
+                            <div class="clients-kpi-icon" style="background:rgba(217,119,6,0.12);color:var(--or-vente);"><i class="fas fa-exclamation-triangle"></i></div>
+                            <div>
+                                <div class="clients-kpi-val" id="kpiClientsUrgent">0</div>
+                                <div class="clients-kpi-lbl">Cas Urgents</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Barre recherche + filtre -->
+                    <div class="clients-toolbar card" style="padding:16px 20px; margin-bottom:20px; display:flex; gap:14px; align-items:center; flex-wrap:wrap;">
+                        <div class="clients-search-bar">
+                            <i class="fas fa-search"></i>
+                            <input type="text" id="clientsSearchInput" placeholder="Rechercher un client, une société, un email...">
+                        </div>
+                        <select id="clientsFilterType" class="form-select" style="width:auto; min-width:160px; margin:0;">
+                            <option value="">Tous les types</option>
+                            <option value="Commercial">Commercial</option>
+                            <option value="Technique">Technique</option>
+                            <option value="SAV">SAV</option>
+                            <option value="Devis">Devis</option>
+                        </select>
+                        <select id="clientsFilterUrgence" class="form-select" style="width:auto; min-width:160px; margin:0;">
+                            <option value="">Toutes urgences</option>
+                            <option value="Urgent">🔴 Urgent</option>
+                            <option value="Moyen">🟡 Moyen</option>
+                            <option value="Faible">🟢 Faible</option>
+                        </select>
+                        <span id="clientsCount" style="margin-left:auto; font-size:0.85rem; color:var(--text-muted); font-weight:500;"></span>
+                    </div>
+
+                    <!-- Tableau clients -->
+                    <div class="card" style="padding:0; overflow:hidden;">
+                        <div style="overflow-x:auto;">
+                            <table class="clients-table" id="clientsTable">
+                                <thead>
+                                    <tr>
+                                        <th><i class="fas fa-hashtag"></i> Réf.</th>
+                                        <th><i class="fas fa-user"></i> Client</th>
+                                        <th><i class="fas fa-building"></i> Société</th>
+                                        <th><i class="fas fa-phone"></i> Téléphone</th>
+                                        <th><i class="fas fa-envelope"></i> Email</th>
+                                        <th><i class="fas fa-tag"></i> Type</th>
+                                        <th><i class="fas fa-fire"></i> Urgence</th>
+                                        <th><i class="fas fa-comment-alt"></i> Sujet</th>
+                                        <th><i class="fas fa-calendar"></i> Date</th>
+                                        <th><i class="fas fa-info-circle"></i> Statut</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="clientsTableBody">
+                                    <!-- Rempli dynamiquement -->
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- Empty state -->
+                        <div id="clientsEmpty" class="clients-empty-state">
+                            <i class="fas fa-users-slash"></i>
+                            <h3>Aucun client enregistré</h3>
+                            <p>Les clients apparaîtront ici automatiquement dès qu'une demande sera soumise via <strong>Contact & Support</strong>.</p>
+                            <button class="btn-primary" style="width:auto;margin-top:16px;padding:10px 24px;" onclick="document.querySelector('.nav-item[data-target=contact-section]').click()">
+                                <i class="fas fa-headset"></i> Aller à Contact & Support
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Modal détail client -->
+                    <div id="clientDetailModal" class="client-modal-overlay" style="display:none;">
+                        <div class="client-modal">
+                            <div class="client-modal-header">
+                                <h3 id="modalClientTitle">Détail Client</h3>
+                                <button id="closeClientModal"><i class="fas fa-times"></i></button>
+                            </div>
+                            <div class="client-modal-body" id="clientModalBody"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Ventes Section -->
+                <div id="ventes-section" class="content-section" style="display: none;">
+                    <div class="page-header"
+                        style="display: flex; justify-content: space-between; align-items: center;">
+                        <h1>CATALOGUE COMMERCIAL & VENTES</h1>
+                        <button id="addProduitBtn" class="btn-primary"
+                            style="width: auto; margin-top: 0; padding: 10px 15px; background-color: var(--or-vente);"><i
+                                class="fas fa-plus"></i> Ajouter un Matériel</button>
+                    </div>
+
+                    <!-- Add Product Form -->
+                    <div class="card form-card" id="produitFormContainer" style="display: none; margin-bottom: 20px;">
+                        <h2>AJOUTER UN NOUVEAU MATÉRIEL</h2>
+                        <form id="produitForm">
+                            <div class="form-group">
+                                <label for="prodNom">Nom du Matériel :</label>
+                                <input type="text" id="prodNom" required placeholder="Ex: Routeur Cisco C1111">
+                            </div>
+                            <div class="form-group">
+                                <label for="prodPrix">Prix (FCFA) :</label>
+                                <input type="number" id="prodPrix" required placeholder="Ex: 150000">
+                            </div>
+                            <div class="form-group">
+                                <label for="prodStock">Quantité en Stock :</label>
+                                <input type="number" id="prodStock" required placeholder="Ex: 10">
+                            </div>
+                            <div class="form-group">
+                                <label for="prodImage">Image ou Vidéo du Matériel :</label>
+                                <input type="file" id="prodImage" name="produitMedia" accept="image/*,video/*" required
+                                    style="padding: 10px; background: var(--bg-light); border: 1px dashed var(--border-color);">
+                            </div>
+                            <div style="display: flex; gap: 10px;">
+                                <button type="submit" class="btn-primary"
+                                    style="background-color: var(--or-vente); margin-top: 0;">Enregistrer le
+                                    Matériel</button>
+                                <button type="button" class="btn-primary" id="cancelProduitBtn"
+                                    style="background-color: var(--text-muted); margin-top: 0;">Annuler</button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="catalog-grid" id="catalogGrid">
+                        <!-- Produits seront ajoutés dynamiquement -->
+                    </div>
+                </div>
+
+                <!-- Interventions Section -->
+                <div id="interventions-section" class="content-section" style="display: none;">
+                    <div class="page-header">
+                        <h1>INTERVENTIONS & SUIVI TECHNIQUE</h1>
+                    </div>
+                    <div class="card">
+                        <p>Module en construction...</p>
+                    </div>
+                </div>
+
+                <!-- Galerie Projets Section -->
+                <div id="galerie-section" class="content-section" style="display: none;">
+                    <div class="page-header"
+                        style="display: flex; justify-content: space-between; align-items: center;">
+                        <div>
+                            <h1><i class="fas fa-photo-video"
+                                    style="color: var(--bleu-action); margin-right: 10px;"></i>GALERIE DES PROJETS
+                                RÉALISÉS</h1>
+                            <p style="color: var(--text-muted); margin-top: 6px; font-size: 0.95rem;">Enregistrez et
+                                consultez les photos et vidéos de vos interventions et projets.</p>
+                        </div>
+                        <button id="addMediaBtn" class="btn-primary"
+                            style="width: auto; margin-top: 0; padding: 10px 20px; background: linear-gradient(135deg, var(--bleu-action), var(--violet-qualite)); display:flex; align-items:center; gap:8px;">
+                            <i class="fas fa-plus"></i> Ajouter un Média
+                        </button>
+                    </div>
+
+                    <!-- Stats Galerie -->
+                    <div class="galerie-stats" id="galerieStats">
+                        <div class="galerie-stat-card">
+                            <div class="galerie-stat-icon"
+                                style="background: rgba(14,165,233,0.15); color: var(--bleu-action);"><i
+                                    class="fas fa-images"></i></div>
+                            <div>
+                                <div class="galerie-stat-number" id="statTotalMedia">0</div>
+                                <div class="galerie-stat-label">Médias Enregistrés</div>
+                            </div>
+                        </div>
+                        <div class="galerie-stat-card">
+                            <div class="galerie-stat-icon"
+                                style="background: rgba(16,185,129,0.15); color: var(--vert-operationnel);"><i
+                                    class="fas fa-image"></i></div>
+                            <div>
+                                <div class="galerie-stat-number" id="statTotalImages">0</div>
+                                <div class="galerie-stat-label">Photos</div>
+                            </div>
+                        </div>
+                        <div class="galerie-stat-card">
+                            <div class="galerie-stat-icon"
+                                style="background: rgba(139,92,246,0.15); color: var(--violet-qualite);"><i
+                                    class="fas fa-video"></i></div>
+                            <div>
+                                <div class="galerie-stat-number" id="statTotalVideos">0</div>
+                                <div class="galerie-stat-label">Vidéos</div>
+                            </div>
+                        </div>
+                        <div class="galerie-stat-card">
+                            <div class="galerie-stat-icon"
+                                style="background: rgba(217,119,6,0.15); color: var(--or-vente);"><i
+                                    class="fas fa-folder-open"></i></div>
+                            <div>
+                                <div class="galerie-stat-number" id="statTotalProjets">0</div>
+                                <div class="galerie-stat-label">Projets Couverts</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Formulaire Ajout Média -->
+                    <div class="card form-card" id="mediaFormContainer" style="display: none; margin-bottom: 25px;">
+                        <h2><i class="fas fa-upload" style="margin-right:8px; color: var(--bleu-action);"></i>AJOUTER UN
+                            NOUVEAU MÉDIA</h2>
+                        <form id="mediaForm">
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                                <div class="form-group">
+                                    <label for="mediaTitre">Titre du Projet :</label>
+                                    <input type="text" id="mediaTitre" required
+                                        placeholder="Ex: Installation réseau - Société ABC">
+                                </div>
+                                <div class="form-group">
+                                    <label for="mediaCategorie">Catégorie :</label>
+                                    <select id="mediaCategorie"
+                                        style="width:100%; padding: 12px 16px; border: 1px solid var(--border-color); border-radius: 8px; outline: none; font-size: 0.95rem; background: white; color: var(--text-main);">
+                                        <option value="Réseau">Réseau & Infrastructure</option>
+                                        <option value="Sécurité">Sécurité & Caméras</option>
+                                        <option value="Informatique">Informatique & Matériel</option>
+                                        <option value="Énergie">Énergie & Câblage</option>
+                                        <option value="Autre">Autre</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="mediaDescription">Description de l'intervention :</label>
+                                <textarea id="mediaDescription" rows="2"
+                                    placeholder="Décrivez brièvement le projet réalisé..."></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="mediaDate">Date de réalisation :</label>
+                                <input type="date" id="mediaDate"
+                                    style="width:100%; padding: 12px 16px; border: 1px solid var(--border-color); border-radius: 8px; outline: none; font-size: 0.95rem;">
+                            </div>
+                            <div class="form-group">
+                                <label>Fichiers (Images & Vidéos) :</label>
+                                <div class="media-drop-zone" id="mediaDropZone">
+                                    <i class="fas fa-cloud-upload-alt"></i>
+                                    <p>Glissez-déposez vos fichiers ici ou</p>
+                                    <label for="mediaFiles" class="btn-primary"
+                                        style="width:auto; margin-top:0; padding:8px 20px; cursor:pointer; display:inline-block;">Parcourir
+                                        les fichiers</label>
+                                    <input type="file" id="mediaFiles" accept="image/*,video/*" multiple
+                                        style="display:none;">
+                                    <p style="font-size:0.8rem; color: var(--text-muted); margin-top:5px;">Formats
+                                        acceptés : JPG, PNG, GIF, MP4, AVI, MOV</p>
+                                </div>
+                                <div id="mediaPreviewList"
+                                    style="display:flex; flex-wrap:wrap; gap:10px; margin-top:12px;"></div>
+                            </div>
+                            <div style="display: flex; gap: 10px; margin-top: 10px;">
+                                <button type="submit" class="btn-primary"
+                                    style="background: linear-gradient(135deg, var(--bleu-action), var(--violet-qualite)); margin-top: 0; flex:1;"><i
+                                        class="fas fa-save"></i> Enregistrer dans la Galerie</button>
+                                <button type="button" id="cancelMediaBtn" class="btn-primary"
+                                    style="background-color: var(--text-muted); margin-top: 0; width: auto; padding: 14px 24px;">Annuler</button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Filtres Galerie -->
+                    <div class="galerie-filtres" id="galerieFiltres" style="display:none;">
+                        <button class="filtre-btn active" data-filter="all">Tous</button>
+                        <button class="filtre-btn" data-filter="images"><i class="fas fa-image"></i> Photos</button>
+                        <button class="filtre-btn" data-filter="videos"><i class="fas fa-video"></i> Vidéos</button>
+                        <button class="filtre-btn" data-filter="Réseau">Réseau</button>
+                        <button class="filtre-btn" data-filter="Sécurité">Sécurité</button>
+                        <button class="filtre-btn" data-filter="Informatique">Informatique</button>
+                        <button class="filtre-btn" data-filter="Énergie">Énergie</button>
+                    </div>
+
+                    <!-- Grille Galerie -->
+                    <div class="galerie-grid" id="galerieGrid">
+                        <!-- Placeholder vide -->
+                        <div class="galerie-empty" id="galerieEmpty">
+                            <i class="fas fa-photo-video"></i>
+                            <h3>Aucun média enregistré</h3>
+                            <p>Cliquez sur "Ajouter un Média" pour commencer à documenter vos projets réalisés.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Parc Matériel Section -->
+                <div id="parc-section" class="content-section" style="display: none;">
+                    <div class="page-header">
+                        <h1>PARC D'ÉQUIPEMENTS DÉPLOYÉS</h1>
+                    </div>
+                    <div class="card">
+                        <p>Module en construction...</p>
+                    </div>
+                </div>
+
+                <!-- Sondages Section -->
+                <div id="sondages-section" class="content-section" style="display: none;">
+                    <div class="page-header"
+                        style="display: flex; justify-content: space-between; align-items: center;">
+                        <h1>QUALITÉ & SONDAGES DE SATISFACTION</h1>
+                        <button id="addSondageBtn" class="btn-primary"
+                            style="width: auto; margin-top: 0; padding: 10px 15px;"><i class="fas fa-plus"></i> Ajouter
+                            un Sondage</button>
+                    </div>
+
+                    <!-- Add Sondage Form (Hidden by default) -->
+                    <div class="card form-card" id="sondageFormContainer" style="display: none; margin-bottom: 20px;">
+                        <h2>NOUVEAU SONDAGE</h2>
+                        <form id="sondageForm">
+                            <div class="form-group">
+                                <label for="clientNom">Nom du Client :</label>
+                                <input type="text" id="clientNom" required placeholder="Ex: Entreprise XYZ">
+                            </div>
+                            <div class="form-group">
+                                <label for="note">Note (sur 5) :</label>
+                                <input type="number" id="note" min="1" max="5" required placeholder="5">
+                            </div>
+                            <div class="form-group">
+                                <label for="commentaire">Commentaire :</label>
+                                <textarea id="commentaire" rows="3" required
+                                    placeholder="Ex: Excellente intervention."></textarea>
+                            </div>
+                            <div style="display: flex; gap: 10px;">
+                                <button type="submit" class="btn-primary"
+                                    style="background-color: var(--vert-operationnel); margin-top: 0;">Enregistrer</button>
+                                <button type="button" class="btn-primary" id="cancelSondageBtn"
+                                    style="background-color: var(--text-muted); margin-top: 0;">Annuler</button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="card" id="sondagesList">
+                        <!-- Default Sondage 1 -->
+                        <div class="sondage-item"
+                            style="border-bottom: 1px solid var(--border-color); padding: 15px 0;">
+                            <div style="display: flex; justify-content: space-between;">
+                                <strong>Client : Alpha Networks</strong>
+                                <span style="color: var(--violet-qualite); font-weight: bold;">Note : 5/5 <i
+                                        class="fas fa-star"></i></span>
+                            </div>
+                            <p style="color: var(--text-muted); margin-top: 5px;">"Intervention rapide et propre.
+                                L'équipement fonctionne parfaitement."</p>
+                        </div>
+                        <!-- Default Sondage 2 -->
+                        <div class="sondage-item" style="padding: 15px 0;">
+                            <div style="display: flex; justify-content: space-between;">
+                                <strong>Client : Beta Solutions</strong>
+                                <span style="color: var(--violet-qualite); font-weight: bold;">Note : 4/5 <i
+                                        class="fas fa-star"></i></span>
+                            </div>
+                            <p style="color: var(--text-muted); margin-top: 5px;">"Bon service, mais le technicien est
+                                arrivé avec 10 minutes de retard."</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Déconnexion Section -->
+                <div id="logout-section" class="content-section" style="display: none;">
+                    <div class="page-header">
+                        <h1>DÉCONNEXION</h1>
+                    </div>
+                    <div class="card">
+                        <p>Vous avez été déconnecté (Simulation). Veuillez rafraîchir la page pour revenir à l'état
+                            initial.</p>
+                    </div>
+                </div>
+
+                <!-- Contact Section -->
+                <div id="contact-section" class="content-section">
+                    <div class="page-header" style="display:flex; justify-content:space-between; align-items:center;">
+                        <div>
+                            <h1><i class="fas fa-headset" style="color:var(--bleu-action); margin-right:10px;"></i>CONTACT & SUPPORT TECHNIQUE</h1>
+                            <p style="color:var(--text-muted); margin-top:6px; font-size:0.95rem;">Soumettez votre demande — notre équipe vous répond sous 24h.</p>
+                        </div>
+                        <div class="support-kpi-bar">
+                            <div class="support-kpi">
+                                <span id="kpiTotalDemandes">0</span>
+                                <label>Demandes</label>
+                            </div>
+                            <div class="support-kpi">
+                                <span id="kpiUrgent">0</span>
+                                <label>Urgentes</label>
+                            </div>
+                            <div class="support-kpi">
+                                <span id="kpiEnAttente">0</span>
+                                <label>En attente</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="contact-grid">
+                        <!-- Formulaire de contact enrichi -->
+                        <div class="card form-card">
+                            <h2><i class="fas fa-paper-plane" style="margin-right:8px;color:var(--bleu-action);"></i>NOUVELLE DEMANDE CLIENT</h2>
+
+                            <!-- Référence auto -->
+                            <div class="ref-badge-container">
+                                <span class="ref-badge">Réf : <strong id="refNumero">PP-000001</strong></span>
+                                <span class="ref-date" id="refDate"></span>
+                            </div>
+
+                            <form id="contactForm">
+                                <!-- Ligne 1 : Nom + Téléphone -->
+                                <div class="form-row-2">
+                                    <div class="form-group">
+                                        <label for="nom"><i class="fas fa-user"></i> Nom Complet :</label>
+                                        <input type="text" id="nom" name="nom" required placeholder="Votre nom complet">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="telephone"><i class="fas fa-phone"></i> Téléphone :</label>
+                                        <input type="tel" id="telephone" name="telephone" required placeholder="+237 6XX XXX XXX">
+                                    </div>
+                                </div>
+
+                                <!-- Ligne 2 : Email + Société -->
+                                <div class="form-row-2">
+                                    <div class="form-group">
+                                        <label for="email"><i class="fas fa-envelope"></i> Adresse E-mail :</label>
+                                        <input type="email" id="email" name="email" placeholder="votre@email.com">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="societe"><i class="fas fa-building"></i> Société / Entreprise :</label>
+                                        <input type="text" id="societe" name="societe" placeholder="Nom de votre entreprise">
+                                    </div>
+                                </div>
+
+                                <!-- Ligne 3 : Type + Urgence -->
+                                <div class="form-row-2">
+                                    <div class="form-group">
+                                        <label><i class="fas fa-tag"></i> Type de demande :</label>
+                                        <div class="radio-group" style="flex-wrap:wrap; gap:10px;">
+                                            <label class="radio-label">
+                                                <input type="radio" name="type_demande" value="Commercial" required>
+                                                <span><i class="fas fa-handshake"></i> Commercial</span>
+                                            </label>
+                                            <label class="radio-label">
+                                                <input type="radio" name="type_demande" value="Technique">
+                                                <span><i class="fas fa-tools"></i> Technique</span>
+                                            </label>
+                                            <label class="radio-label">
+                                                <input type="radio" name="type_demande" value="SAV">
+                                                <span><i class="fas fa-wrench"></i> SAV</span>
+                                            </label>
+                                            <label class="radio-label">
+                                                <input type="radio" name="type_demande" value="Devis">
+                                                <span><i class="fas fa-file-invoice"></i> Devis</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="urgence"><i class="fas fa-exclamation-triangle"></i> Degré d'urgence :</label>
+                                        <select id="urgence" name="urgence" class="form-select">
+                                            <option value="Faible">🟢 Faible – Pas urgent</option>
+                                            <option value="Moyen" selected>🟡 Moyen – Sous 48h</option>
+                                            <option value="Urgent">🔴 Urgent – Immédiat</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <!-- Sujet -->
+                                <div class="form-group">
+                                    <label for="sujet"><i class="fas fa-heading"></i> Sujet de la demande :</label>
+                                    <input type="text" id="sujet" name="sujet" required placeholder="Ex: Panne réseau, demande de devis caméras...">
+                                </div>
+
+                                <!-- Message -->
+                                <div class="form-group">
+                                    <label for="message"><i class="fas fa-comment-alt"></i> Description détaillée :</label>
+                                    <textarea id="message" name="message" rows="4" required
+                                        placeholder="Décrivez votre besoin en détail (équipements concernés, localisation, symptômes...)" style="resize:vertical;"></textarea>
+                                </div>
+
+                                <!-- Pièce jointe -->
+                                <div class="form-group">
+                                    <label for="pieceJointe"><i class="fas fa-paperclip"></i> Pièce jointe (optionnel) :</label>
+                                    <div class="pj-drop-zone" id="pjDropZone">
+                                        <i class="fas fa-cloud-upload-alt"></i>
+                                        <p>Glissez un fichier ici ou</p>
+                                        <label for="pieceJointe" class="btn-primary" style="width:auto;margin-top:0;padding:7px 18px;cursor:pointer;display:inline-block;font-size:0.85rem;">Parcourir</label>
+                                        <input type="file" id="pieceJointe" name="pieceJointe" accept="image/*,.pdf,.doc,.docx" style="display:none;">
+                                        <p style="font-size:0.75rem;color:var(--text-muted);margin-top:4px;">JPG, PNG, PDF, DOC — max 5 Mo</p>
+                                    </div>
+                                    <div id="pjPreview" style="margin-top:10px; display:none;" class="pj-preview-bar">
+                                        <i class="fas fa-file-alt"></i>
+                                        <span id="pjFileName">fichier.pdf</span>
+                                        <button type="button" id="removePj"><i class="fas fa-times"></i></button>
+                                    </div>
+                                </div>
+
+                                <button type="submit" class="btn-primary btn-submit-contact" id="submitContactBtn">
+                                    <i class="fas fa-paper-plane"></i> Envoyer la Demande
+                                </button>
+                            </form>
+                        </div>
+
+                        <!-- Coordonnées -->
+                        <div class="contact-info-container">
+                            <div class="card info-card">
+                                <h2>COORDONNÉES PENTAGONEPLUS</h2>
+
+                                <div class="info-item">
+                                    <div class="info-icon"><i class="fas fa-phone-alt"></i></div>
+                                    <div class="info-text">
+                                        <strong>Téléphone</strong>
+                                        <span>+237 XX XX XX XX XX</span>
+                                    </div>
+                                </div>
+
+                                <div class="info-item">
+                                    <div class="info-icon"><i class="fas fa-envelope"></i></div>
+                                    <div class="info-text">
+                                        <strong>Email</strong>
+                                        <span>contact@pentagoneplus.com</span>
+                                    </div>
+                                </div>
+
+                                <div class="info-item">
+                                    <div class="info-icon"><i class="fas fa-clock"></i></div>
+                                    <div class="info-text">
+                                        <strong>Horaires</strong>
+                                        <span>Lun - Ven : 8h00 - 17h00</span>
+                                    </div>
+                                </div>
+
+                                <div class="info-item">
+                                    <div class="info-icon" style="background:rgba(16,185,129,0.1);color:var(--vert-operationnel);"><i class="fas fa-map-marker-alt"></i></div>
+                                    <div class="info-text">
+                                        <strong>Adresse</strong>
+                                        <span>Yaoundé, Cameroun</span>
+                                    </div>
+                                </div>
+
+                                <div class="info-item" style="margin-bottom:0;">
+                                    <div class="info-icon" style="background:rgba(139,92,246,0.1);color:var(--violet-qualite);"><i class="fas fa-globe"></i></div>
+                                    <div class="info-text">
+                                        <strong>Site Web</strong>
+                                        <span>www.pentagoneplus.com</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card map-card" style="padding: 20px;">
+                                <h2>Carte de localisation</h2>
+                                <div class="map-placeholder" style="border: none; background: transparent; height: auto;">
+                                    <img src="map.png" alt="Plan de localisation Pentagone" style="width: 100%; border-radius: 8px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); display: block;">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Historique des demandes -->
+                    <div class="card" id="historiqueCard" style="margin-top:30px; display:none;">
+                        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px; padding-bottom:15px; border-bottom:1px solid var(--border-color);">
+                            <h2 style="margin:0; border:none; padding:0;"><i class="fas fa-history" style="margin-right:8px; color:var(--violet-qualite);"></i>HISTORIQUE DES DEMANDES</h2>
+                            <button id="clearHistoriqueBtn" style="background:none; border:1px solid #EF4444; color:#EF4444; padding:6px 14px; border-radius:8px; cursor:pointer; font-size:0.82rem; transition:all 0.2s;">
+                                <i class="fas fa-trash"></i> Vider l'historique
+                            </button>
+                        </div>
+                        <div id="historiqueList"></div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>

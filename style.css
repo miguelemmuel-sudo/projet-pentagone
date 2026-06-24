@@ -1694,4 +1694,25 @@ body {
     .client-modal-body { padding: 18px; }
 }
 
+/* Install app button */
+.install-app {
+    color: var(--bleu-action);
+    font-weight: 600;
+}
+.install-app i {
+    color: var(--bleu-action) !important;
+}
 
+/* Mobile optimizations for Map Card */
+@media (max-width: 768px) {
+    .map-card {
+        padding: 10px !important;
+    }
+    .map-placeholder {
+        padding: 0 !important;
+    }
+    .map-placeholder img {
+        height: 250px !important;
+        object-fit: cover;
+    }
+}
